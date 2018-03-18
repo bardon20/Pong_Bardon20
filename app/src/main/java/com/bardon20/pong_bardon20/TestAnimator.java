@@ -19,7 +19,7 @@ package com.bardon20.pong_bardon20;
 public class TestAnimator implements Animator {
 
     // instance variables
-    private int count; // counts the number of logical clock ticks
+    private int count = 0; // counts the number of logical clock ticks
     private boolean goBackwards = false; // whether clock is ticking backwards
 
     /**
@@ -75,10 +75,10 @@ public class TestAnimator implements Animator {
 
         int numX = (count*15)%1975;
         int numY = (count*15)%1225;
-        if (numX < 0 || numY < 0 || numX > 1975 || numY > 1225)
+       /* if ((numX < 0) || (numY < 0 )|| (numX > 1975) || (numY > 1225))
         {
-            goBackwards = !goBackwards;
-        }
+            count = 0;
+        }*/
 
         // Draw the ball in the correct position.
         Paint redPaint = new Paint();
