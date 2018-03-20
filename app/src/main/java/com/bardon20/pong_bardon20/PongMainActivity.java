@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 
@@ -32,10 +34,28 @@ public class PongMainActivity extends AppCompatActivity {
 
         // Connect the animation surface with the animator
         AnimationSurface mySurface = (AnimationSurface) this.findViewById(R.id.animationSurface);
-        mySurface.setAnimator(new TestAnimator());
+        mySurface.setAnimator(new MyAnimator());
+
+        Button addBallButton = (Button) this.findViewById(R.id.addButton);
+        addBallButton.setOnClickListener(new addBallButtonListener());
+
+
+
+
+
 
 
     }
+
+    private class addBallButtonListener implements View.OnClickListener
+    {
+        public void onClick(View button) {
+            new MyAnimator().setPause(false);
+
+        }
+    }
+
+
 }
 
 

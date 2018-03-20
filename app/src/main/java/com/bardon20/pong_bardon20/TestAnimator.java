@@ -75,10 +75,16 @@ public class TestAnimator implements Animator {
 
         int numX = (count*15)%1975;
         int numY = (count*15)%1225;
-       /* if ((numX < 0) || (numY < 0 )|| (numX > 1975) || (numY > 1225))
+
+        if ((numX > 1975) || (numY > 1225))
         {
-            count = 0;
-        }*/
+            goBackwards = true;
+        }
+        else if((numX < 0) || (numY < 0 ))
+        {
+            goBackwards = false;
+        }
+
 
         // Draw the ball in the correct position.
         Paint redPaint = new Paint();

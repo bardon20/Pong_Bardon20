@@ -5,10 +5,45 @@
         android:layout_width="fill_parent"
         xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.bardon20.pong_bardon20.AnimationSurface
+        <com.bardon20.pong_bardon20.AnimationSurface
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
-        android:id="@+id/animationSurface">
+        android:id="@+id/animationSurface"
+            android:layout_weight="1"
+            >
     </com.bardon20.pong_bardon20.AnimationSurface>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/addButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add Ball"
+                android:textSize="12sp"/>
+
+
+            <RadioButton
+                android:id="@+id/radioButtonBeginner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Beginner"
+                android:textSize="12sp" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonExpert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Expert"
+                    android:textSize="12sp" />
+
+        </LinearLayout>
+
+</LinearLayout>
