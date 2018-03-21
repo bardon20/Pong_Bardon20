@@ -16,7 +16,7 @@ public class MyAnimator implements Animator {
     int ballCountY=0;
     int numBalls = 1;
     float paddleLeft = 40;
-    float paddleRight = paddleLeft+1000;
+    float paddleRight = paddleLeft+300;
     boolean goBackwardsX = false;
     boolean goBackwardsY = false;
     boolean pause = false;
@@ -112,16 +112,14 @@ public class MyAnimator implements Animator {
 
     }
 
-    public float setPaddleWidth(int spread)
+    public void setPaddleWidth(int spread)
     {
         paddleRight = paddleLeft+spread;
-        return paddleRight;
     }
 
-    public boolean setPause(boolean isPaused)
+    public void setPause(boolean isPaused)
     {
         pause = isPaused;
-        return pause;
     }
 
 }
