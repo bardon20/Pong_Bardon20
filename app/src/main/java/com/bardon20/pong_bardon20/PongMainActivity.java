@@ -33,6 +33,17 @@ public class PongMainActivity extends AppCompatActivity {
      * creates an AnimationSurface containing a TestAnimator.
      */
 
+
+    /**
+     * [5%] When a ball leaves the field of play, don't add a new ball until the user indicates she is ready by
+     * tapping the screen or a button for that purpose. Used button
+     *
+     *
+     * [5%] Allow the user to change the size of the paddle (for “beginner” vs. “expert” mode) in some
+     * manner. Used radio buttons
+     */
+
+
     private AnimationSurface mySurface;
 
     @Override
