@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.SurfaceView;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -31,7 +33,7 @@ public class PongMainActivity extends AppCompatActivity {
      * creates an AnimationSurface containing a TestAnimator.
      */
 
-    AnimationSurface mySurface;
+    private AnimationSurface mySurface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
