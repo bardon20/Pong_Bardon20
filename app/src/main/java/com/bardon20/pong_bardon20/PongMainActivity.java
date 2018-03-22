@@ -30,7 +30,7 @@ import android.widget.RadioGroup;
 public class PongMainActivity extends AppCompatActivity {
 
     /**
-     * creates an AnimationSurface containing a TestAnimator.
+     * creates an AnimationSurface containing a MyAnimator.
      */
 
 
@@ -55,48 +55,9 @@ public class PongMainActivity extends AppCompatActivity {
         mySurface = (AnimationSurface) this.findViewById(R.id.animationSurface);
         mySurface.setAnimator(new MyAnimator());
 
-        Button addBallButton = (Button) this.findViewById(R.id.addButton);
-        addBallButton.setOnClickListener(new addBallButtonListener());
-
-        RadioGroup diffLevel = (RadioGroup)this.findViewById(R.id.difficultyLevel);
-        diffLevel.setOnCheckedChangeListener(new radioButtonLister());
 
     }
 
-    private class addBallButtonListener implements View.OnClickListener
-    {
-        public void onClick(View button) {
-
-            mySurface.invalidate();
-            MyAnimator newAnimator = new MyAnimator();
-            newAnimator.setPause(false);
-            mySurface.setAnimator(newAnimator);
-        }
-    }
-
-    private class radioButtonLister implements RadioGroup.OnCheckedChangeListener
-    {
-
-        @Override
-        public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-            if( findViewById(checkedId) == findViewById(R.id.radioButtonBeginner))
-            {
-                mySurface.invalidate();
-                MyAnimator newAnimator = new MyAnimator();
-                newAnimator.setPaddleWidth(300);
-                mySurface.setAnimator(newAnimator);
-
-            }
-            else if (findViewById(checkedId) == findViewById(R.id.radioButtonExpert))
-            {
-
-                mySurface.invalidate();
-                MyAnimator newAnimator = new MyAnimator();
-                newAnimator.setPaddleWidth(100);
-                mySurface.setAnimator(newAnimator);
-            }
-        }
-    }
 }
 
 

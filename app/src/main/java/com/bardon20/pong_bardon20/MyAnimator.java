@@ -3,6 +3,7 @@ package com.bardon20.pong_bardon20;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.RectF;
 import android.view.MotionEvent;
 
 import java.util.Random;
@@ -14,13 +15,14 @@ import java.util.Random;
 public class MyAnimator implements Animator {
     int ballCountX=0;
     int ballCountY=0;
-    int numBalls = 1;
-    float paddleLeft = 40;
+    float paddleLeft = 10;
     float paddleRight = paddleLeft+300;
     boolean goBackwardsX = false;
     boolean goBackwardsY = false;
     boolean pause = false;
     int time = 30;
+    RectF beginnerButton = new RectF(750F, 50F, 950F, 150F);
+    RectF expertButton = new RectF(1000F, 50F, 1200F, 150F);
 
     @Override
     public int interval() {
@@ -42,6 +44,10 @@ public class MyAnimator implements Animator {
         return false;
     }
 
+
+    /**
+     * controls count, position and drawing of balls
+     */
     @Override
     public void tick(Canvas g) {
 
@@ -50,20 +56,24 @@ public class MyAnimator implements Animator {
         //increasing or decreasing x and y for position of ball
         if (goBackwardsX) {
             ballCountX--;
-        } else {
+        }
+        else {
             ballCountX++;
         }
-        if (goBackwardsY) {
+        if (goBackwardsY) {;
             ballCountY--;
-        } else {
+        }
+        else {
             ballCountY++;
         }
 
-        int numX = (ballCountX * 15) % 1700;
+
+        //changing count to position
+        int numX = (ballCountX * 15) % 2025;
         int numY = (ballCountY * 15) % 1275;
 
         //1st, 2nd, and 3rd walls
-        if (numX > 1675 || numX < 10) {
+        if (numX > 2000 || numX < 10) {
             goBackwardsX = !goBackwardsX;
         }
         if (numY < 10) {
@@ -71,12 +81,11 @@ public class MyAnimator implements Animator {
         }
         //4th wall
         if (numY > 1250) {
-            /*//creating new ball
+            //creating new ball
             ballCountX = r.nextInt(1900) + 100;
             ballCountY = 0;
             //changing interval for velocity of ball randomly
             time = r.nextInt(60);
-            numBalls++;*/
             pause = true;
         }
 
@@ -100,26 +109,63 @@ public class MyAnimator implements Animator {
         blackPaint.setColor(Color.BLACK);
         g.drawRect(paddleLeft, 1200, paddleRight, 1250, blackPaint);
 
+        //draw beginnerButton, experButton and text
+        Paint buttonPaint = new Paint();
+        buttonPaint.setColor(Color.rgb(130, 130, 130));
+        blackPaint.setTextSize(50F);
+        g.drawRect(beginnerButton, buttonPaint);
+        g.drawRect(expertButton, buttonPaint);
+        g.drawText("Beginner", 750F, 100F, blackPaint);
+        g.drawText(" Expert ", 1015F, 100F, blackPaint);
+
     }
 
-
+    /**
+     * "buttons" to change paddle size or
+     * !pause game to add new ball after out of bounds
+     */
     @Override
     public void onTouch(MotionEvent event) {
 
         if (event.getAction() == MotionEvent.ACTION_DOWN)
         {
+            if(event.getX()<950 && event.getX()>750 && event.getY()<150 && event.getY()>50 )
+            {
+                setPaddleWidth(300);
+            }
+            else if(event.getX()<1200 && event.getX()>100 && event.getY()<150 && event.getY()>50)
+            {
+                setPaddleWidth(100);
+            }
+            else
+            {
+                pause = false;
+            }
         }
 
     }
+
 
     public void setPaddleWidth(int spread)
     {
         paddleRight = paddleLeft+spread;
     }
 
-    public void setPause(boolean isPaused)
-    {
-        pause = isPaused;
-    }
-
 }
+
+
+/**
+ External Citation
+ Date: 3-21-2018
+ Problem: getting x and y location of click
+ Resource:
+ http:https://stackoverflow.com/questions/1967039/onclicklistener-x-y-location-of-event
+ Solution: I used the example code from this post.
+ */
+/**
+ External Citation
+ Date: 3-21-2018
+ Problem: grawign text on surface view
+ Resource:https://developer.android.com/reference/android/graphics/Canvas.html
+ Solution: looked it up
+ */
