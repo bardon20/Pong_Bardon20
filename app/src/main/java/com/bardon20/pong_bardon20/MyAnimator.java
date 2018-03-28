@@ -9,17 +9,20 @@ import android.view.MotionEvent;
 import java.util.Random;
 
 /**
- * Created by rbard on 3/18/2018.
+ * @author Bardon20 on 3/18/2018.
  */
 
 public class MyAnimator implements Animator {
     int ballCountX=0;
     int ballCountY=0;
+    int velX = 1;
+    int velY = 2;
     float paddleLeft = 10;
-    float paddleRight = paddleLeft+300;
+    float paddleRight = paddleLeft+1200;
     boolean goBackwardsX = false;
     boolean goBackwardsY = false;
     boolean pause = false;
+    boolean expertMode = false;
     int time = 30;
     RectF beginnerButton = new RectF(750F, 50F, 950F, 150F);
     RectF expertButton = new RectF(1000F, 50F, 1200F, 150F);
@@ -55,16 +58,20 @@ public class MyAnimator implements Animator {
 
         //increasing or decreasing x and y for position of ball
         if (goBackwardsX) {
-            ballCountX--;
+            ballCountX = ballCountX-velX;
+            //ballCountX--;
         }
         else {
-            ballCountX++;
+            ballCountX = ballCountX+velX;
+            //ballCountX++;
         }
         if (goBackwardsY) {;
-            ballCountY--;
+            ballCountY = ballCountY-velY;
+            //ballCountY--;
         }
         else {
-            ballCountY++;
+            ballCountY = ballCountY+velY;
+            //ballCountY++;
         }
 
 
@@ -73,24 +80,26 @@ public class MyAnimator implements Animator {
         int numY = (ballCountY * 15) % 1275;
 
         //1st, 2nd, and 3rd walls
-        if (numX > 2000 || numX < 10) {
+        if (numX >= 2000 || numX <= 10) {
             goBackwardsX = !goBackwardsX;
         }
-        if (numY < 10) {
+        if (numY <= 10) {
             goBackwardsY = !goBackwardsY;
         }
         //4th wall
         if (numY > 1250) {
+            //choosing  new velocity for X and Y
+            velX = r.nextInt(2)+1;
+            velY = r.nextInt(2)+1;
             //creating new ball
             ballCountX = r.nextInt(1900) + 100;
             ballCountY = 0;
             //changing interval for velocity of ball randomly
-            time = r.nextInt(60);
             pause = true;
         }
 
         // "paddle" wall
-        if (numX < paddleRight && numX > paddleLeft && numY == 1200) {
+        if (numX < paddleRight && numX > paddleLeft && numY ==1200) {
             goBackwardsY = !goBackwardsY;
         }
 
@@ -127,6 +136,7 @@ public class MyAnimator implements Animator {
     @Override
     public void onTouch(MotionEvent event) {
 
+        //tracks clicks, create a new ball and buttons for expert vs. Beginner mode
         if (event.getAction() == MotionEvent.ACTION_DOWN)
         {
             if(event.getX()<950 && event.getX()>750 && event.getY()<150 && event.getY()>50 )
@@ -140,6 +150,19 @@ public class MyAnimator implements Animator {
             else
             {
                 pause = false;
+            }
+        }
+        //Paddle movement, follows the users touch
+        if (event.getY() > 1000)
+        {
+            paddleLeft = event.getX();
+            if (expertMode)
+            {
+                setPaddleWidth(100);
+            }
+            else
+            {
+                setPaddleWidth(300);
             }
         }
 
@@ -169,3 +192,12 @@ public class MyAnimator implements Animator {
  Resource:https://developer.android.com/reference/android/graphics/Canvas.html
  Solution: looked it up
  */
+/**
+ External Citation
+ Date: 3-21-2018
+ Problem: getting the paddle to follow the users finger
+ Resource:https://developer.android.com/reference/android/view/MotionEvent.html
+ Solution: looked it up, ended up using none of the ACTION_...
+ */
+
+

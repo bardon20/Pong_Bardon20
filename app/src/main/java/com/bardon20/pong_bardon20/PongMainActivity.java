@@ -9,10 +9,7 @@ import android.view.Menu;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.animation.Animation;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+
 
 
 /**
@@ -23,7 +20,14 @@ import android.widget.RadioGroup;
  *
  * @author Andrew Nuxoll
  * @author Steven R. Vegdahl
- * @version July 2013
+ *
+ */
+
+/**
+ * @author Bardon20
+ *
+ * @version March 2018.
+ *
  *
  */
 
