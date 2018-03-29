@@ -160,7 +160,7 @@ public class MyAnimator implements Animator {
         g.drawText("Lost Balls:"+ballsLost, 1015F, 100F, blackPaint);
         if(ballsLost==6)
         {
-            //displays message and ends game if too many balls lost
+            //displays message and ends game if 6 balls lost
             g.drawText("Game Over", 900F, 600F, blackPaint);
             quit = true;
         }
