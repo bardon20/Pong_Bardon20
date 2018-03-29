@@ -47,11 +47,13 @@ public class MyAnimator implements Animator {
     int velX = 1;
     int velY = 2;
     int score;
+    int ballsLost=0;
     float paddleLeft = 10;
     float paddleRight = paddleLeft+300;
     boolean goBackwardsX = false;
     boolean goBackwardsY = false;
     boolean pause = false;
+    boolean quit = false;
     boolean expertMode = false;
     int time = 30;
     RectF beginnerButton = new RectF(750F, 50F, 950F, 150F);
@@ -74,9 +76,7 @@ public class MyAnimator implements Animator {
     }
 
     @Override
-    public boolean doQuit() {
-        return false;
-    }
+    public boolean doQuit() {return quit;}
 
 
     /**
@@ -94,7 +94,7 @@ public class MyAnimator implements Animator {
         setWalls(numX, numY);
         drawBall(numX, numY, g);
         drawPaddle(g);
-        drawScore(g);
+        drawScoreLostBalls(g);
 
     }
 
@@ -138,6 +138,7 @@ public class MyAnimator implements Animator {
             ballCountY = 0;
             //changing interval for velocity of ball randomly
             score = score-5;
+            ballsLost++;
         }
 
         // "paddle" wall
@@ -150,12 +151,19 @@ public class MyAnimator implements Animator {
     }
 
     //draws the score on the AnimationSurface
-    public void drawScore(Canvas g)
+    public void drawScoreLostBalls(Canvas g)
     {
         Paint blackPaint = new Paint();
         blackPaint.setColor(Color.BLACK);
         blackPaint.setTextSize(50F);
         g.drawText("Score: "+score, 750F, 100F, blackPaint);
+        g.drawText("Lost Balls:"+ballsLost, 1015F, 100F, blackPaint);
+        if(ballsLost==6)
+        {
+            //displays message and ends game if too many balls lost
+            g.drawText("Game Over", 900F, 600F, blackPaint);
+            quit = true;
+        }
     }
 
     //creates an random velocity when called
